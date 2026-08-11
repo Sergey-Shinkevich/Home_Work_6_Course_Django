@@ -128,3 +128,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = (BASE_DIR / "static",)
+
+# Путь, по которому файлы будут доступны в браузере (например: http://127.0.0.1:8000/media/products/photo/1.jpg)
+MEDIA_URL = '/media/'
+
+# Физический путь к папке на диске, где эти файлы будут реально лежать (рядом с manage.py появится папка media)
+MEDIA_ROOT = BASE_DIR / 'media'
