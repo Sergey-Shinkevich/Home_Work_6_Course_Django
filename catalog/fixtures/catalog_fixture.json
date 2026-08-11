@@ -1,0 +1,31 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Электроника",
+        "description": "Гаджеты и устройства"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Одежда",
+        "description": "Стильная одежда для всех"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Смартфон",
+        "description": "Мобильный телефон с отличной камерой",
+        "image": "",
+        "category": 3,
+        "purchase_price": "55000.00",
+        "created_at": "2026-08-11T21:57:02.402Z",
+        "updated_at": "2026-08-11T22:16:50.002Z"
+    }
+}
+]
