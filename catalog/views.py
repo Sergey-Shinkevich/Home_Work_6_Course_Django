@@ -2,7 +2,9 @@ from django.shortcuts import get_object_or_404, render
 from .models import Product
 
 def home(request):
-    return render(request, "home.html")
+    products = Product.objects.all()
+    context = {'object_list': products}
+    return render(request, "home.html", context=context)
 
 
 def contacts(request):
