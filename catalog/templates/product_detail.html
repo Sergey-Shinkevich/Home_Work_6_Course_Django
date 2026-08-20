@@ -1,77 +1,28 @@
-<!doctype html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Skystore - {{ product.name }}</title>
-    <!-- Подключите статичеcкие файлы со стилями Bootstrap -->
-    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet"/>
-</head>
-<body>
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Skystore</h5>
-    <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-    </nav>
-</div>
+{% extends 'base.html' %}
 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">{{ product.name }}</h1>
-    <p class="lead">Категория: {{ product.category.name }}</p>
-</div>
+{% block title %}Skystore - {{ product.name }}{% endblock %}
 
-<div class="container">
-    <div class="card mb-4 box-shadow">
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Детали продукта</h4>
-        </div>
-        <div class="card-body">
-            <div class="row align-items-center">
-                <!-- Картинка товара слева -->
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
                 {% if product.image %}
-                <div class="col-md-5 text-center mb-3 mb-md-0">
-                    <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}" style="max-height: 350px; object-fit: contain;">
-                </div>
-                <div class="col-md-7">
-                {% else %}
-                <div class="col-12">
-                {% endif %}
-                    <!-- Цена и инфо справа -->
-                    <h1 class="card-title pricing-card-title text-success mb-3">{{ product.purchase_price }} ₽</h1>
-
-                    <div class="my-3 text-start">
-                        <h5>Описание:</h5>
-                        <p class="text-muted">
-                            {{ product.description|default:"Описание отсутствует." }}
-                        </p>
-
-                        <ul class="list-unstyled mt-3 mb-4 text-start">
-                            <li><strong>Категория:</strong> {{ product.category.name }}</li>
-                            <li><strong>Дата добавления:</strong> {{ product.created_at|date:"d.m.Y H:i" }}</li>
-                        </ul>
+                    <div class="text-center p-4 bg-light">
+                        <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}" style="max-height: 400px; object-fit: contain;">
                     </div>
-
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title mb-3">{{ product.name }}</h2>
+                    <p class="card-text text-muted">{{ product.description }}</p>
+                    <h3 class="text-primary mb-4">Цена: {{ product.purchase_price }} ₽</h3>
+                    
                     <div class="d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-lg btn-primary">Купить</button>
-                        <a href="/" class="btn btn-lg btn-outline-secondary">Назад к каталогу</a>
+                        <a href="{% url 'catalog:home' %}" class="btn btn-outline-secondary">Назад к каталогу</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Лаконичный футер -->
-    <footer class="pt-4 my-md-5 pt-md-5 border-top text-center">
-        <div class="row">
-            <div class="col-12">
-                <p>SkyStore</p>
-                <small class="d-block mb-3 text-muted">&copy; 2026</small>
-            </div>
-        </div>
-    </footer>
 </div>
-<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}
