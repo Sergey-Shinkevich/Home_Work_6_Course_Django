@@ -1,0 +1,91 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skystore - {{ product.name }}</title>
+    <!-- Подключите статичеcкие файлы со стилями Bootstrap -->
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Skystore</h5>
+    <nav class="ms-5">
+        <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
+        <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
+    </nav>
+</div>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">{{ product.name }}</h1>
+    <p class="lead">Категория: {{ product.category.name }}</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Колонка с изображением (если оно есть) -->
+        {% if product.image %}
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-sm">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Колонка с информацией о товаре -->
+        <div class="{% if product.image %}col-md-7{% else %}col-12{% endif %}">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Детали продукта</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ product.purchase_price }} ₽</h1>
+
+                    <div class="my-4 text-start">
+                        <h5>Описание:</h5>
+                        <p class="text-muted">
+                            {{ product.description|default:"Описание отсутствует." }}
+                        </p>
+
+                        <ul class="list-unstyled mt-3 mb-4 text-start">
+                            <li><strong>Категория:</strong> {{ product.category.name }}</li>
+                            <li><strong>Дата добавления:</strong> {{ product.created_at|date:"d.m.Y H:i" }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-lg btn-primary">Купить</button>
+                        <a href="/" class="btn btn-lg btn-outline-secondary">Назад к каталогу</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                SkyStore
+                <small class="d-block mb-3 text-muted">&copy; 2023</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Категории</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Рассылки</a></li>
+                    <li><a class="text-muted" href="#">Телеграм боты</a></li>
+                    <li><a class="text-muted" href="#">Полезные утилиты</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>О нас</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="/contacts/">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
