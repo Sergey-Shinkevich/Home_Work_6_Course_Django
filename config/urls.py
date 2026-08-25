@@ -24,7 +24,7 @@ import catalog
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("catalog.urls", namespace="catalog")),
+    path("", include("catalog.urls")),
 ]
 
 if settings.DEBUG:
