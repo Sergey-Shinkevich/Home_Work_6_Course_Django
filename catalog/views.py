@@ -1,19 +1,18 @@
-from django.shortcuts import get_object_or_404, render
+from django.views.generic import DetailView, ListView, TemplateView
 from .models import Product
 
-def home(request):
-    products = Product.objects.all()
-    context = {'object_list': products}
-    return render(request, "home.html", context=context)
+
+class HomeView(ListView):
+    model = Product
+    template_name = "home.html"
+    context_object_name = "object_list"
 
 
-def contacts(request):
-    return render(request, "contacts.html")
+class ContactsView(TemplateView):
+    template_name = "contacts.html"
 
-def product_detail_view(request, pk):
-  # Достаем товар по id или выдаем 404 ошибку, если его нет
-  product = get_object_or_404(Product, pk=pk)
-  context = {
-      'product': product,
-  }
-  return render(request, 'product_detail.html', context)
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "product_detail.html"
+    context_object_name = "product"
