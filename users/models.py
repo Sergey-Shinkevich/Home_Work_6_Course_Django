@@ -12,4 +12,4 @@ class CustomUser(AbstractUser):
         return self.email
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = []
