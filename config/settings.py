@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalog",
     "blog",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,5 @@ MEDIA_URL = "/media/"
 
 # Физический путь к папке на диске, где эти файлы будут реально лежать (рядом с manage.py появится папка media)
 MEDIA_ROOT = BASE_DIR / "media"
+
+AUTH_USER_MODEL = 'users.CustomUser'
