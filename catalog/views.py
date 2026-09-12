@@ -40,12 +40,11 @@ class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "product_form.html"
     success_url = reverse_lazy("catalog:home")
 
-
     def test_func(self):
         product = self.get_object()
         user = self.request.user
         # Проверяем, что текущий пользователь является владельцем продукта
-        return user == product.owner or self.request.user.has_perm('catalog.can_unpublish_product')
+        return user == product.owner or self.request.user.has_perm("catalog.can_unpublish_product")
 
 
 class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -53,8 +52,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = "product_confirm_delete.html"
     success_url = reverse_lazy("catalog:home")
 
-
     def test_func(self):
         product = self.get_object()
         user = self.request.user
-        return user == product.owner or self.request.user.has_perm('catalog.delete_product')
+        return user == product.owner or self.request.user.has_perm("catalog.delete_product")
