@@ -1,12 +1,12 @@
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
+
 from catalog.services import get_products_by_category
 
-
 from .forms import ProductForm
-from .models import Product, Category
+from .models import Category, Product
 
 
 class HomeView(ListView):
