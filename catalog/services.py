@@ -5,7 +5,7 @@ from catalog.models import Product
 
 def get_products_by_category(category_id):
     """Возвращает список продуктов для указанной категории с учетом флага CACHE_ENABLED из настроек."""
-    cache_key = f"products_category_{category_id}"
+    cache_key = f"category_{category_id}"
 
     # 1. Проверяем, включен ли кэш в настройках
     if getattr(settings, "CACHE_ENABLED", False):
