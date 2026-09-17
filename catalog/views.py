@@ -1,9 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
+from catalog.services import get_products_by_category
+
 from .forms import ProductForm
-from .models import Product
+from .models import Category, Product
 
 
 class HomeView(ListView):
@@ -56,3 +59,19 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         product = self.get_object()
         user = self.request.user
         return user == product.owner or self.request.user.has_perm("catalog.delete_product")
+
+
+class ProductByCategoryListView(ListView):
+    model = Product
+    template_name = "product_by_category.html"
+    context_object_name = "product_list"
+
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, pk=self.kwargs.get("category_id"))
+        return get_products_by_category(self.category.pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем саму категорию в контекст, чтобы вывести её название в шаблоне
+        context["category"] = self.category
+        return context
